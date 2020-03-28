@@ -20,11 +20,11 @@ class AdminController {
     }
     async update(req, res) {
         let id = req.params.id
-        // let { userName, passWord } = res.body
-        console.log(res.body);
-        // let result = await adminModel.findByIdAndUpdate(id, { userName, passWord })
-        // if (!result) return res.send({ code: '404', msg: '管理员修改失败' })
-        res.send({ code: 0, msg: '0' })
+        let { userName, passWord } = req.body
+        console.log(userName, passWord);
+        let result = await adminModel.findByIdAndUpdate(id, { userName, passWord })
+        if (!result) return res.send({ code: '404', msg: '管理员修改失败' })
+        res.send({ code: 0, msg: '管理员修改成功' })
     }
     async remove(req, res) {
         let id = req.params.id

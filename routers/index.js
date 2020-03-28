@@ -8,12 +8,14 @@ const kinds = require('./kinds')
 
 const router = Router()
 
-router.all('*', autoToken, authPermissions)
+router.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+}, autoToken, authPermissions)
 router.use('/admin', admin)
 router.use('/upload', upload)
 router.use('/goods', goods)
 router.use('/kinds', kinds)
-
 
 module.exports = router
 

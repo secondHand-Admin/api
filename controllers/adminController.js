@@ -1,11 +1,13 @@
 const adminModel = require('../mongodb/model/adminModel')
+const { secret } = require('../config')
+const jwt = require("jsonwebtoken")
 class AdminController {
     async login(req, res) {
         let { userName, passWord } = req.body;
         let userInfo = await adminModel.findOne({ userName, passWord });
         if (!userInfo) return res.send({ code: 404, msg: '登录失败' })
-        res.send({ code: 0, msg: '登录成功' })
-
+        let token = jwt.sign({ userInfo }, secret, { expiresIn: "1d" })
+        res.send({ code: 0, msg: '登录成功', token })
     }
     async find(req, res) {
         let adminList = await adminModel.find()
@@ -21,7 +23,6 @@ class AdminController {
     async update(req, res) {
         let id = req.params.id
         let { userName, passWord } = req.body
-        console.log(userName, passWord);
         let result = await adminModel.findByIdAndUpdate(id, { userName, passWord })
         if (!result) return res.send({ code: '404', msg: '管理员修改失败' })
         res.send({ code: 0, msg: '管理员修改成功' })

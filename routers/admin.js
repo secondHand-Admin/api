@@ -1,5 +1,4 @@
 const { Router } = require('express')
-
 const { login, find, create, update, remove } = require('../controllers/adminController')
 
 const adminRouter = Router()

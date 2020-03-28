@@ -7,7 +7,8 @@ class AdminController {
         let userInfo = await adminModel.findOne({ userName, passWord });
         if (!userInfo) return res.send({ code: 404, msg: '登录失败' })
         let token = jwt.sign({ userInfo }, secret, { expiresIn: "1d" })
-        res.send({ code: 0, msg: '登录成功', token })
+        let { leavel } = userInfo
+        res.send({ code: 0, leavel, msg: '登录成功', token })
     }
     async find(req, res) {
         let adminList = await adminModel.find()

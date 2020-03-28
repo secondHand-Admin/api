@@ -2,7 +2,7 @@ const goodsMedel = require('../mongodb/model/goodsModel')
 class goodsController {
     // 查询商品列表
     async find(req, res) {
-        let { page = 1, pageSize = 10 } = req.body
+        let { page = 1, pageSize = 10 } = req.params
         let count = await goodsMedel.countDocuments()
         let list = await goodsMedel.find().limit(Number(pageSize))
             .skip((page - 1) * pageSize).populate('kind', 'kindName -_id')

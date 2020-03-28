@@ -2,7 +2,7 @@ const kindsModel = require('../mongodb/model/kindsModel')
 class KindsConstroller {
     async find(req, res) {
         let list = await kindsModel.find()
-        res.send({ code: 0, list })
+        res.send({ code: 0, msg: '查询成功', list })
     }
     async create(req, res) {
         let { kindName } = req.body

@@ -24,7 +24,7 @@ class AdminController {
         let id = req.params.id
         let { userName, passWord } = req.body
         let result = await adminModel.findByIdAndUpdate(id, { userName, passWord })
-        if (!result) return res.send({ code: '404', msg: '管理员修改失败' })
+        if (!result) return res.send({ code: 404, msg: '管理员修改失败' })
         res.send({ code: 0, msg: '管理员修改成功' })
     }
     async remove(req, res) {

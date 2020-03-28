@@ -4,7 +4,7 @@ const { login, find, create, update, remove } = require('../controllers/adminCon
 const adminRouter = Router()
 adminRouter.post('/login', login)
 adminRouter.post('/create', create)
-adminRouter.get('/find', find)
+adminRouter.get('/', find)
 adminRouter.put('/:id', update)
 adminRouter.delete('/:id', remove)
 

@@ -10,7 +10,7 @@ let goodsSchema = new Schema({
     price: { type: Number, default: 0 },
     marketPrice: { type: Number, default: 0 },
     unit: { type: String, default: "件" },
-    kind: { type: Schema.Types.ObjectId, ref: "kinds" },
+    kind: { type: Schema.Types.ObjectId, ref: "seckinds" },
     createTime: {
         type: Date,
         default: new Date().getTime()

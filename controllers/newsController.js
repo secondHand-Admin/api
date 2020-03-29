@@ -4,16 +4,17 @@ class newsController {
     async find(req, res) {
         let count = 0, list = []
         let { page = 1, pageSize = 10, state = null } = req.query
-        console.log('state :', state, req);
         if (state !== null) {
             count = await newsMedel.find({ state }).countDocuments()
             list = await newsMedel.find({ state }).limit(Number(pageSize))
-                .skip((page - 1) * pageSize)
+                .skip((page - 1) * pageSize).populate('userName', 'userName -_id')
+                .populate('adminName', 'userName -_id')
         }
         else {
-            count = await newsMedel.countDocuments()
+            count = await newsMedel.find().countDocuments()
             list = await newsMedel.find().limit(Number(pageSize))
-                .skip((page - 1) * pageSize)
+                .skip((page - 1) * pageSize).populate('userName', 'userName -_id')
+                .populate('adminName', 'userName -_id')
         }
         res.send({ code: 0, msg: '查询成功', list, count })
     }
@@ -26,8 +27,11 @@ class newsController {
     }
     // post 添加文章
     async create(req, res) {
-        let { title, name, price, text, state, src, href } = req.body
-        let result = await newsMedel.insertMany({ title, name, price, text, state, src, href })
+        let { title, name, price, text, state, src, href, user_id, admin_id } = req.body
+        let result = await newsMedel.insertMany({
+            title, name, price, text, state, src, href,
+            userName: user_id, adminName: admin_id
+        })
         if (!result) res.send({ code: 404, msg: '添加失败' })
         res.send({ code: 0, msg: '添加成功', result })
     }

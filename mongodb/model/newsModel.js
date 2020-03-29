@@ -10,6 +10,8 @@ const newsSchema = new Schema({
     href: { type: String, require: true, default: '' },
     flow: { type: Number, require: true, default: 0 },
     coll: { type: Number, require: true, default: 0 },
+    user_name: { type: Schema.Types.ObjectId, ref: 'users' },
+    admin_name: { type: Schema.Types.ObjectId, ref: 'admins' },
     time: { type: Date, require: true, default: Date.now() },
 })
 module.exports = model('news', newsSchema)

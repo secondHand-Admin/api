@@ -1645,6 +1645,20 @@
             "optional": false,
             "field": "coll",
             "description": "<p>收藏量 0</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>用户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>管理员id</p>"
           }
         ]
       }

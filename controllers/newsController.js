@@ -3,10 +3,11 @@ class newsController {
     // 查询信息get
     async find(req, res) {
         let count = 0, list = []
-        let { page = 1, pageSize = 10, state } = req.params
-        if (state) {
-            count = await newsMedel.find({ $where: this.state = state }).countDocuments()
-            list = await newsMedel.find({ $where: this.state = state }).limit(Number(pageSize))
+        let { page = 1, pageSize = 10, state = null } = req.query
+        console.log('state :', state, req);
+        if (state !== null) {
+            count = await newsMedel.find({ state }).countDocuments()
+            list = await newsMedel.find({ state }).limit(Number(pageSize))
                 .skip((page - 1) * pageSize)
         }
         else {

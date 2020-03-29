@@ -8,11 +8,11 @@ class KindsConstroller {
     async create(req, res) {
         let result = null;
         //添加二级需要type id kindName
-        let { type, id, kindName } = req.body
+        let { type, id, kindName, src } = req.body
         if (type === 'sec') {
             // 二级分类添加
             let _id = null;
-            result = await seckindsModel.findOne({ name: kindName }) || await seckindsModel.insertMany({ name: kindName })
+            result = await seckindsModel.findOne({ name: kindName }) || await seckindsModel.insertMany({ name: kindName, src })
             if (result instanceof Array) _id = result[0]._id
             else _id = result._id
             if (_id) result = await kindsModel.findByIdAndUpdate(id, { $addToSet: { seckindName: _id } })
@@ -28,10 +28,10 @@ class KindsConstroller {
     async update(req, res) {
         let result = null;
         let { id } = req.params
-        let { oldName, kindName, type } = req.body
+        let { oldName, kindName, type, src } = req.body
         if (type === 'sec' && oldName && kindName)
             // 二级分类修改
-            result = await seckindsModel.findOneAndUpdate({ name: oldName }, { name: kindName })
+            result = await seckindsModel.findOneAndUpdate({ name: oldName }, { name: kindName, src })
         else if (type === 'del' && id) {
             //删除二级分类项
             result = await seckindsModel.findOne({ name: oldName })

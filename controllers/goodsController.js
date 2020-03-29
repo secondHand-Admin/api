@@ -13,21 +13,21 @@ class goodsController {
         let id = req.params.id
         let result = await goodsMedel.find({ _id: id })
         if (!result) return res.send({ code: 404, msg: '查询失败' })
-        res.send({ code: 0, msg: '获取商品信息成功!', data: result })
+        res.send({ code: 0, msg: '获取商品信息成功!', result })
     }
     // 添加商品
     async create(req, res) {
         let { name, desc, src, link, stock, putaway, marketPrice, price, unit, kind } = req.body
         let result = await goodsMedel.insertMany({ name, desc, src, link, stock, putaway, price, marketPrice, unit, kind })
         if (!result) res.send({ code: 404, msg: '添加商品失败' })
-        res.send({ code: 0, msg: '商品添加成功' })
+        res.send({ code: 0, msg: '商品添加成功', result })
     }
     async update(req, res) {
         let id = req.params.id
         let { name, desc, path, link, stock, putaway, marketPrice, price, unit } = req.body
         let result = await goodsMedel.findByIdAndUpdate(id, { name, desc, path, link, stock, putaway, marketPrice, price, unit })
         if (!result) return res.send({ code: 404, msg: '商品修改失败' })
-        res.send({ code: 0, msg: '商品修改成功' })
+        res.send({ code: 0, msg: '商品修改成功', result })
     }
     async delete(req, res) {
         let id = req.params.id
@@ -40,7 +40,7 @@ class goodsController {
         let { putaway = 0 } = req.body
         let result = await goodsMedel.findByIdAndUpdate(id, { putaway })
         if (!result) return res.send({ code: 404, msg: '商品修改失败' })
-        res.send({ code: 0, msg: '商品修改成功' })
+        res.send({ code: 0, msg: '商品修改成功', result })
     }
 }
 module.exports = new goodsController()

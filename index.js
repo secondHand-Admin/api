@@ -14,4 +14,4 @@ app.use(bodyParser.json())
 // 使用路由
 app.use(router)
 
-app.listen(port, () => console.log(`App listening on port 3000!`))
+app.listen(port, () => console.log(`App listening on port ${port}!`))

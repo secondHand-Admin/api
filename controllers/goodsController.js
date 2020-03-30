@@ -34,7 +34,7 @@ class goodsController {
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
         if (result instanceof Object) _id = result
         else _id = result[0]._id
-        let result = await goodsMedel.findByIdAndUpdate(id, { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind })
+        result = await goodsMedel.findByIdAndUpdate(id, { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind })
         if (!result) return res.send({ code: 404, msg: '商品修改失败' })
         res.send({ code: 0, msg: '商品修改成功', result })
     }

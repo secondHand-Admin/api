@@ -42,6 +42,13 @@
             "optional": false,
             "field": "passWord",
             "description": "<p>User's passworrd.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>User's img.</p>"
           }
         ]
       }
@@ -409,6 +416,13 @@
             "optional": false,
             "field": "passWord",
             "description": "<p>密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>img</p>"
           }
         ]
       }

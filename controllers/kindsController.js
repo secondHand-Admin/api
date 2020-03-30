@@ -2,7 +2,10 @@ const kindsModel = require('../mongodb/model/kindsModel')
 const seckindsModel = require('../mongodb/model/seckindsModel')
 class KindsConstroller {
     async find(req, res) {
-        let list = await kindsModel.find().populate('seckindName', 'name -_id')
+        let list = await kindsModel.find().populate({
+            path: 'seckindName',
+            select: '_id name src'
+        })
         res.send({ code: 0, msg: '查询成功', list })
     }
     async create(req, res) {

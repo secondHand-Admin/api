@@ -21,16 +21,16 @@ class AdminController {
         res.send({ code: 0, msg: '查询成功', data: adminList })
     }
     async create(req, res) {
-        let { userName, passWord } = req.body
+        let { userName, passWord, img } = req.body
         if (!userName || !passWord) return res.send({ code: -1, msg: '管理员添加失败' })
-        let result = await adminModel.insertMany({ userName, passWord })
+        let result = await adminModel.insertMany({ userName, passWord, img })
         if (!result) return res.send({ code: -1, msg: '管理员添加失败' })
         res.send({ code: 0, msg: '管理员添加成功' })
     }
     async update(req, res) {
         let id = req.params.id
-        let { userName, passWord } = req.body
-        let result = await adminModel.findByIdAndUpdate(id, { userName, passWord })
+        let { userName, passWord, img } = req.body
+        let result = await adminModel.findByIdAndUpdate(id, { userName, passWord, img })
         if (!result) return res.send({ code: 404, msg: '管理员修改失败' })
         res.send({ code: 0, msg: '管理员修改成功' })
     }

@@ -2498,7 +2498,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "file",
             "optional": false,
-            "field": "Img",
+            "field": "img",
             "description": "<p>图片文件.</p>"
           }
         ]

@@ -1,4 +1,6 @@
 const newsMedel = require('../mongodb/model/newsModel')
+const adminMedel = require('../mongodb/model/adminModel')
+const usersMedel = require('../mongodb/model/usersModel')
 class newsController {
     // 查询信息get
     async find(req, res) {
@@ -7,14 +9,14 @@ class newsController {
         if (state !== null) {
             count = await newsMedel.find({ state }).countDocuments()
             list = await newsMedel.find({ state }).limit(Number(pageSize))
-                .skip((page - 1) * pageSize).populate('userName', 'userName -_id')
-                .populate('adminName', 'userName -_id')
+                .skip((page - 1) * pageSize).populate('user_name', 'userName -_id')
+                .populate('admin_name', 'userName -_id')
         }
         else {
             count = await newsMedel.find().countDocuments()
             list = await newsMedel.find().limit(Number(pageSize))
-                .skip((page - 1) * pageSize).populate('userName', 'userName -_id')
-                .populate('adminName', 'userName -_id')
+                .skip((page - 1) * pageSize).populate('user_name', 'userName -_id')
+                .populate('admin_name', 'userName -_id')
         }
         res.send({ code: 0, msg: '查询成功', list, count })
     }
@@ -30,9 +32,15 @@ class newsController {
         let { title, name, price, text, state, src, href, user_id, admin_id } = req.body
         let result = await newsMedel.insertMany({
             title, name, price, text, state, src, href,
-            userName: user_id, adminName: admin_id
+            user_name: user_id, admin_name: admin_id
         })
         if (!result) res.send({ code: 404, msg: '添加失败' })
+        let option = {
+            type: user_id ? 'user_name' : 'admin_name',
+            _id: user_id || admin_id
+        }
+        //更新表里文章数量 关联统计未习得
+        if (user_id || admin_id) newsController.Article(option)
         res.send({ code: 0, msg: '添加成功', result })
     }
     // put 修改
@@ -79,6 +87,12 @@ class newsController {
         }
         if (result) return res.send({ code: 0, msg: '修改成功', result })
         res.send({ code: 404, msg: '修改失败' })
+    }
+    static async Article(option) {
+        let { type, _id } = option
+        let article = await newsMedel.find({ [type]: _id }).countDocuments()
+        if (type === 'user_name') return usersMedel.findByIdAndUpdate(_id, { article })
+        adminMedel.findByIdAndUpdate(_id, { article })
     }
 }
 module.exports = new newsController()

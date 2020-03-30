@@ -1,4 +1,5 @@
 const adminModel = require('../mongodb/model/adminModel')
+const newsModel = require('../mongodb/model/usersModel')
 const { secret } = require('../config')
 const jwt = require("jsonwebtoken")
 class AdminController {
@@ -8,11 +9,16 @@ class AdminController {
         if (!userInfo) return res.send({ code: 404, msg: '登录失败' })
         let token = jwt.sign({ userInfo }, secret, { expiresIn: "1d" })
         let { leavel } = userInfo
-        res.send({ code: 0, leavel, msg: '登录成功', token })
+        res.send({ code: 0, leavel, msg: '登录成功', userInfo, token })
     }
     async find(req, res) {
         let adminList = await adminModel.find()
         res.send({ code: 0, msg: '查询成功', adminList })
+    }
+    async findOne(req, res) {
+        let id = req.params.id
+        let adminList = await adminModel.find({ _id: id })
+        res.send({ code: 0, msg: '查询成功', data: adminList })
     }
     async create(req, res) {
         let { userName, passWord } = req.body
@@ -30,7 +36,7 @@ class AdminController {
     }
     async remove(req, res) {
         let id = req.params.id
-        let result = await adminModel.findByIdAndDelete(id)
+        let result = await adminModel.findByIdAndDelete(id) && await newsModel.deleteMany({ admin_name: id })
         if (!result) return res.send({ code: 404, msg: '管理员删除失败' })
         res.send({ code: 0, msg: '管理员删除成功' })
     }

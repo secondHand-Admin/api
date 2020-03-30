@@ -1,4 +1,5 @@
 module.exports = {
     host: 'http://localhost:3000',
-    secret: 'secondHand-Admin'
+    secret: 'secondHand-Admin',
+    usecret: 'secondHand-user',
 }

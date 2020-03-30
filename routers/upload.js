@@ -4,6 +4,6 @@ const multer = require('multer')
 const upload = multer({})
 
 const uploadRouter = Router();
-uploadRouter.post('/uploadImg', upload.single('Img'), uploadImg)
+uploadRouter.post('/uploadImg', upload.single('img'), uploadImg)
 
 module.exports = uploadRouter

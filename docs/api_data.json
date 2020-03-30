@@ -550,7 +550,7 @@
             "type": "String",
             "optional": false,
             "field": "kind",
-            "description": "<p>二级类别 _id (别的无效)</p>"
+            "description": "<p>二级分类名字</p>"
           }
         ]
       }
@@ -1019,7 +1019,7 @@
             "type": "String",
             "optional": false,
             "field": "kind",
-            "description": "<p>二级类别 _id (别的无效)</p>"
+            "description": "<p>二级分类名字</p>"
           }
         ]
       }

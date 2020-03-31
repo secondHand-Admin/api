@@ -13,7 +13,7 @@ class UserController {
     }
     async find(req, res) {
         let { page = 1, pageSize = 10 } = req.query
-        let count = await usersMedel.countDocuments()
+        let count = await userMedel.countDocuments()
         let userList = await userModel.find().limit(Number(pageSize))
             .skip((page - 1) * pageSize)
         res.send({ code: 0, count, msg: '查询成功', userList })

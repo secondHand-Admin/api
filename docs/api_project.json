@@ -1,6 +1,6 @@
 {
   "name": "kao",
-  "version": "3.1.2",
+  "version": "3.1.5",
   "description": "",
   "title": "kele",
   "url": "http://193.112.181.254:3000",
@@ -9,7 +9,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-03-30T15:56:36.920Z",
+    "time": "2020-03-31T15:38:13.466Z",
     "url": "http://apidocjs.com",
     "version": "0.20.1"
   }

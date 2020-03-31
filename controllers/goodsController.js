@@ -12,7 +12,7 @@ class goodsController {
     // 查找某一个
     async findOneById(req, res) {
         let id = req.params.id
-        let result = await goodsModel.find({ _id: id })
+        let result = await goodsModel.find({ _id: id }).populate('kind', 'name -_id')
         if (!result) return res.send({ code: 404, msg: '查询失败' })
         res.send({ code: 0, msg: '获取商品信息成功!', result })
     }

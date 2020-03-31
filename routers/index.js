@@ -12,7 +12,7 @@ const analysis = require('./analysis')
 
 const router = Router()
 
-router.all('*', cors(), autoToken, authPermissions)
+// router.all('*', cors(), autoToken, authPermissions)
 router.use('/admin', admin)
 router.use('/user', user)
 router.use('/upload', upload)

@@ -13,9 +13,10 @@ class AdminController {
     }
     async find(req, res) {
         let { page = 1, pageSize = 10 } = req.query
+        let count = await adminMedel.countDocuments()
         let adminList = await adminModel.find().limit(Number(pageSize))
             .skip((page - 1) * pageSize)
-        res.send({ code: 0, msg: '查询成功', adminList })
+        res.send({ code: 0, count, msg: '查询成功', adminList })
     }
     async findOne(req, res) {
         let id = req.params.id

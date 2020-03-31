@@ -21,7 +21,6 @@ class goodsController {
         let _id = null;
         let { name, desc, src, link, stock, putaway, marketPrice, price, unit, kind } = req.body
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
-        console.log(result);
         result instanceof Array ? _id = result[0]._id : _id = result
         result = await goodsMedel.insertMany({ name, desc, src, link, stock, putaway, price, marketPrice, unit, kind: _id })
         if (!result) res.send({ code: 404, msg: '添加商品失败' })

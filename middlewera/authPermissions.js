@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
         let { host } = req.headers;
         let { method, body, path } = req
         let { userName = '' } = body.userInfo
-        let dateLog = `Time:${Date()} User:${userName} Method:${method} url:${host + path}`
+        let dateLog = `${Date()} User:${userName} Method:${method} Url:${host + path}\n`
         console.log('Log:', dateLog);
         if (path.indexOf('/login') !== -1) return next()
         let { leavel } = body.userInfo

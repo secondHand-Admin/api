@@ -21,8 +21,8 @@ class goodsController {
         let _id = null;
         let { name, desc, src, link, stock, putaway, marketPrice, price, unit, kind } = req.body
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
-        if (result instanceof Object) _id = result
-        else _id = result[0]._id
+        console.log(result);
+        result instanceof Array ? _id = result[0]._id : _id = result
         result = await goodsMedel.insertMany({ name, desc, src, link, stock, putaway, price, marketPrice, unit, kind: _id })
         if (!result) res.send({ code: 404, msg: '添加商品失败' })
         res.send({ code: 0, msg: '商品添加成功', result })
@@ -32,8 +32,7 @@ class goodsController {
         let id = req.params.id
         let { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind } = req.body
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
-        if (result instanceof Object) _id = result
-        else _id = result[0]._id
+        result instanceof Array ? _id = result[0]._id : _id = result
         result = await goodsMedel.findByIdAndUpdate(id, { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind })
         if (!result) return res.send({ code: 404, msg: '商品修改失败' })
         res.send({ code: 0, msg: '商品修改成功', result })

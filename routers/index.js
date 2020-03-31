@@ -8,6 +8,7 @@ const upload = require('./upload')
 const goods = require('./goods')
 const kinds = require('./kinds')
 const news = require('./news')
+const analysis = require('./analysis')
 
 const router = Router()
 
@@ -18,6 +19,7 @@ router.use('/upload', upload)
 router.use('/goods', goods)
 router.use('/kinds', kinds)
 router.use('/news', news)
+router.use('/analysis', analysis)
 
 module.exports = router
 

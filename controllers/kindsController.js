@@ -16,8 +16,7 @@ class KindsConstroller {
             // 二级分类添加
             let _id = null;
             result = await seckindsModel.findOne({ name: kindName }) || await seckindsModel.insertMany({ name: kindName, src })
-            if (result instanceof Array) _id = result[0]._id
-            else _id = result._id
+            result instanceof Array ? _id = result[0]._id : _id = result
             if (_id) result = await kindsModel.findByIdAndUpdate(id, { $addToSet: { seckindName: _id } })
         }
         else {

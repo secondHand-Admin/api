@@ -12,7 +12,9 @@ class UserController {
         res.send({ code: 0, leavel, msg: '登录成功', userInfo, token })
     }
     async find(req, res) {
-        let userList = await userModel.find()
+        let { page = 1, pageSize = 10 } = req.query
+        let userList = await userModel.find().limit(Number(pageSize))
+            .skip((page - 1) * pageSize)
         res.send({ code: 0, msg: '查询成功', userList })
     }
     async findOne(req, res) {

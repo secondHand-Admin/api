@@ -1,7 +1,7 @@
 const jsonWebToken = require("jsonwebtoken")
 const { secret } = require("../config")
 module.exports = (req, res, next) => {
-    if (req.path.indexOf('/login') !== -1 || req.path.indexOf('/uploads')) return next()
+    if (req.path.indexOf('/login') !== -1 || req.path.indexOf('/uploads') !== -1) return next()
     try {
         let token = req.headers.authorization.split("Bearer ")[1]
         let { userInfo } = jsonWebToken.verify(token, secret)

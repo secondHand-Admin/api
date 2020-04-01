@@ -6,7 +6,7 @@ class goodsController {
         let { page = 1, pageSize = 10 } = req.query
         let count = await goodsModel.countDocuments()
         let list = await goodsModel.find().limit(Number(pageSize))
-            .skip((page - 1) * pageSize).populate('kind', 'name -_id')
+            .skip((page - 1) * pageSize).populate('kind -_id')
         res.send({ code: 0, msg: '查询成功', list, count })
     }
     // 查找某一个

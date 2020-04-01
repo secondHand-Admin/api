@@ -14,6 +14,9 @@ class anController {
                 $group: {
                     _id: "$kind",
                     count: { $sum: 1 },
+                    countStock: { $sum: "$stock" },
+                    minPrice: { $min: '$price' },
+                    maxPrice: { $max: '$price' },
                     list: {
                         $push: {
                             name: '$name',

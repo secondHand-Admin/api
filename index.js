@@ -1,5 +1,6 @@
 const express = require('express')
 const router = require('./routers')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 require('./mongodb')
 const app = express()
@@ -11,6 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+
+app.use(cors())
 // 使用路由
 app.use(router)
 

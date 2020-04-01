@@ -1,5 +1,4 @@
 const { Router } = require('express')
-const cors = require('cors')
 const autoToken = require('../middlewera/autoToken')
 const authPermissions = require('../middlewera/authPermissions')
 const admin = require('./admin')
@@ -12,7 +11,7 @@ const analysis = require('./analysis')
 
 const router = Router()
 
-router.all('*', cors(), autoToken, authPermissions)
+router.all('/', autoToken, authPermissions)
 router.use('/admin', admin)
 router.use('/user', user)
 router.use('/upload', upload)

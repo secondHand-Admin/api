@@ -19,7 +19,7 @@ class goodsController {
     // 添加商品
     async create(req, res) {
         let _id = null;
-        let { name, desc, src, link, stock, putaway, marketPrice, price, unit, kind } = req.body
+        let { name, desc, src, link, stock, putaway, marketPrice, price, unit, kind = '未分类' } = req.body
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
         result instanceof Array ? _id = result[0]._id : _id = result
         result = await goodsModel.insertMany({ name, desc, src, link, stock, putaway, price, marketPrice, unit, kind: _id })
@@ -29,7 +29,7 @@ class goodsController {
     async update(req, res) {
         let _id = null;
         let id = req.params.id
-        let { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind } = req.body
+        let { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind = '未分类' } = req.body
         let result = await seckindsModel.findOne({ name: kind }) || await seckindsModel.insertMany({ name: kind })
         result instanceof Array ? _id = result[0]._id : _id = result
         result = await goodsModel.findByIdAndUpdate(id, { name, desc, path, link, stock, putaway, marketPrice, price, unit, kind })
